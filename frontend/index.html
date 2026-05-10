@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Masala Mahal - Indian Food Game</title>
+    
+    <!-- Meta Tags for SEO and Social Sharing -->
+    <meta name="description" content="🪔 Masala Mahal - Cook delicious Indian dishes in this fun cooking game!">
+    <meta name="theme-color" content="#FF6B35" />
+    <meta name="keywords" content="indian food, cooking game, masala, restaurant game" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="🪔 Masala Mahal - Indian Food Game" />
+    <meta property="og:description" content="Cook delicious Indian dishes in this fun cooking game!" />
+    <meta property="og:image" content="./icon-512.png" />
+    
+    <!-- Twitter Card -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:title" content="🪔 Masala Mahal - Indian Food Game" />
+    <meta property="twitter:description" content="Cook delicious Indian dishes in this fun cooking game!" />
+    <meta property="twitter:image" content="./icon-512.png" />
+    
+    <!-- Favicons & Icons (ALL SAME FOLDER) -->
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png" />
+    <link rel="manifest" href="./package.json" />
+    
+    <!-- PWA Icons -->
+    <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="./icon-512.png" />
+    
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      
+      body { 
+        margin: 0; 
+        padding: 0;
+        font-family: system-ui, -apple-system, sans-serif;
+        background: linear-gradient(135deg, #FF6B35 0%, #F7931E 50%, #D4A017 100%);
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+      
+      #root {
+        min-height: 100vh;
+        position: relative;
+      }
+      
+      /* Loading screen */
+      .loading {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #FF6B35 0%, #F7931E 50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        color: white;
+        font-size: 1.2rem;
+        transition: opacity 0.3s ease;
+      }
+      
+      .loading::before {
+        content: "🪔";
+        font-size: 4rem;
+        margin-bottom: 1rem;
+        animation: glow 2s ease-in-out infinite alternate;
+      }
+      
+      @keyframes glow {
+        from { filter: drop-shadow(0 0 10px #FFD700); }
+        to { filter: drop-shadow(0 0 20px #FFD700); }
+      }
+      
+      .spinner {
+        width: 50px;
+        height: 50px;
+        border: 4px solid rgba(255,255,255,0.3);
+        border-top: 4px solid white;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin-top: 1rem;
+      }
+      
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+      
+      /* Hide scrollbars */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      
+      ::-webkit-scrollbar-track {
+        background: rgba(255,255,255,0.1);
+      }
+      
+      ::-webkit-scrollbar-thumb {
+        background: rgba(255,255,255,0.3);
+        border-radius: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Loading Screen -->
+    <div class="loading" id="loading">
+      <div class="spinner"></div>
+      <div>Loading Masala Mahal...</div>
+    </div>
+    
+    <div id="root"></div>
+    
+    <script type="module" src="./src/main.jsx"></script>
+    
+    <!-- Hide loading screen when app loads -->
+    <script>
+      window.addEventListener('load', () => {
+        const loading = document.getElementById('loading');
+        loading.style.opacity = '0';
+        setTimeout(() => {
+          loading.remove();
+        }, 300);
+      });
+    </script>
+  </body>
+</html>
